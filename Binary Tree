@@ -1,0 +1,64 @@
+#include<iostream>
+#include<conio.h>
+
+using namespace std;
+ 
+class binarytree
+{
+public:
+	int data;
+	binarytree* left;
+	binarytree* right;
+};
+
+
+int maxDepth(binarytree* node)
+{
+	if (node == NULL)
+	{
+		return 0;
+	}
+		
+	else
+	{
+		
+		int lDepth = maxDepth(node->left);
+		int rDepth = maxDepth(node->right);
+
+		
+		if (lDepth > rDepth)
+		{
+			return(lDepth + 1);
+		}
+			
+		else
+		{
+			return(rDepth + 1);
+		}
+	}
+}
+
+
+binarytree* newNode(int data)
+{
+	binarytree* Node = new  binarytree();
+	Node->data = data;
+	Node->left = NULL;
+	Node->right = NULL;
+
+	return(Node);
+}
+
+
+int main()
+{
+	binarytree *root = newNode(1);
+
+	root->left = newNode(2);
+	root->right = newNode(3);
+	root->left->left = newNode(4);
+	root->left->right = newNode(5);
+
+	cout << "Height of tree is " << maxDepth(root);
+	return 0;
+}
